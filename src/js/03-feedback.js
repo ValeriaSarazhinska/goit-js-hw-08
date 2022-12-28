@@ -6,15 +6,17 @@ const textarea = document.querySelector('textarea');
 
 const formData = localStorage.getItem('feedback-form-state');
 const parsedFormData = JSON.parse(formData);
-input.value = parsedFormData.email;
-textarea.value = parsedFormData.message;
+input.value = parsedFormData.email ? parsedFormData.email : '';
+textarea.value = parsedFormData.message ? parsedFormData.message : '';
 
-form.addEventListener('input', throttle(handleInput,500));
+form.addEventListener('input', throttle(handleInput, 500));
 form.addEventListener('submit', handleSubmit);
 
 function handleInput(event) {
-  const { email, message } = event.currentTarget.elements;
-  localStorage.setItem('feedback-form-state', JSON.stringify({ email: email.value, message: message.value }));
+  if(event.currentTarget.elements){
+    const { email, message } = event.currentTarget.elements;
+    localStorage.setItem('feedback-form-state', JSON.stringify({ email: email.value, message: message.value }));
+  }
 }
 
 function handleSubmit(event) {
