@@ -33,5 +33,5 @@ function handleSubmit(event) {
 
   console.log({ email: email.value, message: message.value });
   event.currentTarget.reset();
-  localStorage.clear()
+  localStorage.removeItem('feedback-form-state')
 }
